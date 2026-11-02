@@ -1,0 +1,14 @@
+target/
+data/
+docs/local/
+models/
+*.model
+*.bin
+.env
+.env.*
+
+# Local secrets and measurements
+.env
+.env.*
+!.env.example
+docs/local/
