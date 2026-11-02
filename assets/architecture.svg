@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="t d">
+  <title id="t">LumiNovels architecture</title>
+  <desc id="d">Pipeline from the MyAnimeList REST API through MalClient, CsvStore, TextPipeline, TF-IDF with ChiSquareSelector, a two-layer NeuralNetwork and genre probabilities to the Recommender, which returns the top 5 light novels.</desc>
+  <style>
+    .bg { fill: #0d1117; }
+    .node { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .focus { stroke: #58a6ff; }
+    .out { stroke: #3fb950; }
+    .name { fill: #e6edf3; font: 14px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .sub { fill: #8b949e; font: 12px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .head { fill: #e6edf3; font: 16px -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .wire { fill: none; stroke: #30363d; stroke-width: 2; }
+    .flow { fill: none; stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 10 90; stroke-dashoffset: 100; animation: pulse 4s linear infinite; }
+    .d1 { animation-delay: 0s; }
+    .d2 { animation-delay: 0.4s; }
+    .d3 { animation-delay: 0.8s; }
+    .d4 { animation-delay: 1.2s; }
+    .d5 { animation-delay: 1.6s; }
+    .d6 { animation-delay: 2s; }
+    .d7 { animation-delay: 2.4s; }
+    .d8 { animation-delay: 2.8s; }
+    .arrow { fill: #58a6ff; }
+    @keyframes pulse { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .flow { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; opacity: 0.6; }
+    }
+  </style>
+  <rect class="bg" x="0" y="0" width="960" height="400"/>
+  <text class="head" x="22" y="40">LumiNovels pipeline</text>
+  <text class="sub" x="22" y="62">Ingest, clean, select features, classify genres, recommend.</text>
+
+  <!-- connectors: base wires -->
+  <path class="wire" d="M170 122 H214"/>
+  <path class="wire" d="M362 122 H406"/>
+  <path class="wire" d="M554 122 H598"/>
+  <path class="wire" d="M746 122 H790"/>
+  <path class="wire" d="M864 154 V250"/>
+  <path class="wire" d="M790 282 H746"/>
+  <path class="wire" d="M598 282 H554"/>
+  <path class="wire" d="M406 282 H362"/>
+  <path class="wire" d="M480 154 V250"/>
+
+  <!-- connectors: animated pulses, pathLength 100 -->
+  <path class="flow d1" pathLength="100" d="M170 122 H214"/>
+  <path class="flow d2" pathLength="100" d="M362 122 H406"/>
+  <path class="flow d3" pathLength="100" d="M554 122 H598"/>
+  <path class="flow d4" pathLength="100" d="M746 122 H790"/>
+  <path class="flow d5" pathLength="100" d="M864 154 V250"/>
+  <path class="flow d6" pathLength="100" d="M790 282 H746"/>
+  <path class="flow d7" pathLength="100" d="M598 282 H554"/>
+  <path class="flow d8" pathLength="100" d="M406 282 H362"/>
+  <path class="flow d4" pathLength="100" d="M480 154 V250"/>
+
+  <!-- arrow heads -->
+  <path class="arrow" d="M214 122 l-6 -4 v8 z"/>
+  <path class="arrow" d="M406 122 l-6 -4 v8 z"/>
+  <path class="arrow" d="M598 122 l-6 -4 v8 z"/>
+  <path class="arrow" d="M790 122 l-6 -4 v8 z"/>
+  <path class="arrow" d="M864 250 l-4 -6 h8 z"/>
+  <path class="arrow" d="M746 282 l6 -4 v8 z"/>
+  <path class="arrow" d="M554 282 l6 -4 v8 z"/>
+  <path class="arrow" d="M362 282 l6 -4 v8 z"/>
+  <path class="arrow" d="M480 250 l-4 -6 h8 z"/>
+
+  <text class="sub" x="488" y="206">catalogue vectors</text>
+
+  <!-- row 1 -->
+  <rect class="node" x="22" y="90" width="148" height="64" rx="6"/>
+  <text class="name" x="34" y="116">MyAnimeList</text>
+  <text class="sub" x="34" y="138">REST API v2 ranking</text>
+
+  <rect class="node" x="214" y="90" width="148" height="64" rx="6"/>
+  <text class="name" x="226" y="116">MalClient</text>
+  <text class="sub" x="226" y="138">paging, rate limit</text>
+
+  <rect class="node" x="406" y="90" width="148" height="64" rx="6"/>
+  <text class="name" x="418" y="116">CsvStore</text>
+  <text class="sub" x="418" y="138">LightNovels.csv</text>
+
+  <rect class="node" x="598" y="90" width="148" height="64" rx="6"/>
+  <text class="name" x="610" y="116">TextPipeline</text>
+  <text class="sub" x="610" y="138">normalise, tokenise</text>
+
+  <rect class="node" x="790" y="90" width="148" height="64" rx="6"/>
+  <text class="name" x="802" y="116">TF-IDF</text>
+  <text class="sub" x="802" y="138">+ ChiSquareSelector</text>
+
+  <!-- row 2 -->
+  <rect class="node focus" x="790" y="250" width="148" height="64" rx="6"/>
+  <text class="name" x="802" y="276">NeuralNetwork</text>
+  <text class="sub" x="802" y="298">2 layers, SGD</text>
+
+  <rect class="node" x="598" y="250" width="148" height="64" rx="6"/>
+  <text class="name" x="610" y="276">Genre probabilities</text>
+  <text class="sub" x="610" y="298">softmax or sigmoid</text>
+
+  <rect class="node focus" x="406" y="250" width="148" height="64" rx="6"/>
+  <text class="name" x="418" y="276">Recommender</text>
+  <text class="sub" x="418" y="298">cosine + 0.3 blend</text>
+
+  <rect class="node out" x="214" y="250" width="148" height="64" rx="6"/>
+  <text class="name" x="226" y="276">Top 5</text>
+  <text class="sub" x="226" y="298">light novels</text>
+
+  <text class="sub" x="22" y="372">Stop words and duplicates are removed inside TextPipeline. The ChiSquareSelector keeps 2,000 terms.</text>
+</svg>
