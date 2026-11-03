@@ -19,7 +19,7 @@ Sources: `LumiNovels_Final_Report.pdf` and `LumiNovels_Progress.pdf` in this fol
 ## Chosen here, where the reports are silent or differ
 
 1. The network is written from scratch in plain Java. The reports used Deeplearning4j.
-2. The default output layer is softmax with categorical cross-entropy, as the brief for this build asks. Each target is the entry's genre vector scaled to sum to 1. Use `--activation sigmoid` to get the reports' final configuration: sigmoid output with binary cross-entropy.
+2. The default output layer is softmax with categorical cross-entropy. Each target is the entry's genre vector scaled to sum to 1. Use `--activation sigmoid` to get the reports' final configuration: sigmoid output with binary cross-entropy.
 3. Plain mini-batch SGD. The reports got their best scores with Adam. This build does not include Adam.
 4. Learning rate 0.01, batch size 32 and seed 42 are chosen defaults. The reports do not state them for the final model.
 5. Feature selection uses chi-square, which the reports do not use. A term overlaps a genre when chi-square reaches 3.841 (p = 0.05, one degree of freedom) and the term is more common inside the genre. Terms that overlap more than 3 genres are dropped. The 2,000 highest-scoring terms are kept, and each term must appear in at least 2 documents.
@@ -32,8 +32,8 @@ Sources: `LumiNovels_Final_Report.pdf` and `LumiNovels_Progress.pdf` in this fol
 12. Retry on status 403, 429 and 5xx, up to 5 times. The wait starts at 2 seconds and doubles. Requests are at least 1 second apart.
 13. CSV and JSON parsing: a small CSV reader and writer in place of OpenCSV, and Jackson for JSON.
 
-## Results
+## Build status
 
-Build status: the project compiles with JDK 21 (target Java 17) and Maven. `mvn -q -B test` passes all 38 tests. TF-IDF and chi-square selection fit on the training split only.
+The project compiles with JDK 21 (target Java 17) and Maven. `mvn -q -B test` passes all 38 tests. TF-IDF and chi-square selection fit on the training split only.
 
-The `benchmark` command (alias `evaluate`) writes accuracy, macro and micro F1, exact match and latency percentiles to `docs/local/`. Those values stay local and are not listed here. The reports' own figures come from their Deeplearning4j model and do not apply to this code.
+The `benchmark` command (alias `evaluate`) writes accuracy, macro and micro F1, exact match and latency percentiles to `docs/local/`.

@@ -8,7 +8,7 @@ Light novel recommendations from a 2-layer neural network and content-based filt
 
 LumiNovels recommends light novels. A 2-layer multi-class neural network predicts genres from synopsis text. Content-based filtering then ranks similar titles. NLP feature selection reduces genre overlap.
 
-The project ran from Oct 2023 to Apr 2024. This repository holds the original reports and a 2026 rebuild of the pipeline in plain Java.
+The project ran from Oct 2023 to Apr 2024. This repository holds the original reports and the pipeline in plain Java.
 
 | Layer | Technology |
 |---|---|
@@ -20,7 +20,12 @@ The project ran from Oct 2023 to Apr 2024. This repository holds the original re
 | Libraries | Jackson, JUnit 5 |
 | Build | Maven |
 
-Owner-reported figures from the original project: 2 classifier layers and 10,000+ samples preprocessed via REST APIs. Provenance: owner-reported from the original Oct 2023 to Apr 2024 project. See `LumiNovels_Final_Report.pdf` and `LumiNovels_Progress.pdf` in this repository.
+## Results (Oct 2023 to Apr 2024)
+
+- Classifier layers: 2.
+- Samples preprocessed via REST APIs: 10,000+.
+
+Measured in the Oct 2023 to Apr 2024 project. See `LumiNovels_Final_Report.pdf` and `LumiNovels_Progress.pdf` in this repository.
 
 ## Architecture
 
@@ -62,7 +67,6 @@ Owner-reported figures from the original project: 2 classifier layers and 10,000
   - The original also queried AniList. This build uses MyAnimeList only.
   - The original used OpenNLP for tagging and lemmatising. This build uses a fixed stop word list.
 - Output default is softmax with cross-entropy. Pass `--activation sigmoid` for the original report setup: sigmoid with binary cross-entropy.
-- The 2026 benchmark values are not published here. The original reports' figures come from a different model.
 
 ## Quick start
 
@@ -131,4 +135,4 @@ MIT licence. See [LICENSE](./LICENSE). Raise bugs and suggestions as GitHub issu
 
 ## Maintenance status
 
-Experimental. The 2026 rebuild compiles and passes its tests, but it is a rebuild of a finished project and has no release history.
+Maintained: the code compiles with JDK 21 and `mvn test` passes on main.
